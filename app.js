@@ -23,7 +23,9 @@ app.get("/blogs/new", function(req, res){
 	res.render("new");
 });
 
-
+app.post("/blogs", function(req, res){
+	console.log("you hit the post route");
+});
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
