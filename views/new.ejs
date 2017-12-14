@@ -10,13 +10,13 @@
 				<form action="/blogs" method="POST">
 					<div>
 						<div class="form-group">
-							<input class="form-control" type="text" value="" placeholder="Title">
+							<input class="form-control" type="text" name="blog[title]" placeholder="Title">
 						</div>
 						<div class="form-group">
-							<input class="form-control" type="text" value="" placeholder="Written By">	
+							<input class="form-control" type="text" name="blog[author]" placeholder="Written By">	
 						</div>
 						<div class="form-group">
-							<textarea class="form-control" rows="25">Entry...</textarea>
+							<textarea class="form-control" name="blog[dec]" rows="25">Entry...</textarea>
 						</div>
 						<button class="btn btn-primary">Post!</button>
 					</div>	

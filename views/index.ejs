@@ -1,0 +1,18 @@
+<% include ./partials/header.ejs %>
+
+
+<div class="container">
+	<div class="row">
+		<h1>Here is the Index page</h1>
+	</div>
+	<a href="blogs/new" class="btn btn-primary">Add a new post</a>
+	<% blogs.forEach(function(blogs){ %>
+		<div class="container">
+			<h2><%= blogs.title %></h2>
+			<span><%= blogs.posted %></span>		
+			<p><%= blogs.author %></p>
+			<p><%= blogs.desc %></p>
+		</div>
+	<% }) %>
+</div>
+<% include ./partials/footer.ejs %>
