@@ -10,9 +10,12 @@
 		<div class="container">
 			<h2><%= blogs.title %></h2>
 			<span><%= blogs.posted %></span>		
-			<p><%= blogs.author %></p>
+			<p><%= blogs.author.substring(0,2) %></p>
 			<p><%= blogs.desc %></p>
+			<a href="/blogs/<%= blogs._id %>">Read more</a>
 		</div>
 	<% }) %>
 </div>
 <% include ./partials/footer.ejs %>
+<!-- 
+neeed to fix subscring issue -->

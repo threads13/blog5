@@ -1,3 +1,35 @@
+
 h1 {
-	color: red;
+	padding-top: 30px;
+	padding-left: 10px;
+	font-size: 50px;
+}
+
+
+.borders {
+	/*border: 1px solid black;*/
+/*	padding-bottom: 20px;*/
+}
+
+#desc {
+	padding-top: 15px;
+}
+
+#author a {
+	color: black;
+	font-family: bold;
+	font-size: 20px;
+}
+
+p em {
+	padding-left: 8px;
+	padding-top: 0px;
+	margin: 0;
+	font-size: 12px;
+}
+
+#back {
+	position: fixed; bottom: 0;
+	padding-left: 10px;
+	padding-bottom: 10px;
 }

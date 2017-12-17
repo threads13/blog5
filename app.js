@@ -64,9 +64,17 @@ app.post("/blogs", function(req, res){
 	// redirect
 });
 
-app.post("/blogs", function(req, res){
-	console.log("you hit the post route");
+// SHOW ROUTE
+app.get("/blogs/:id", function(req, res){
+	Blog.findById(req.params.id, function(err, foundBlog){
+		if(err){
+			res.redirect("/blogs");
+		} else {
+			res.render("show", {blog: foundBlog});
+		}
+	});
 });
+
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
