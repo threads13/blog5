@@ -1,20 +1,26 @@
 <% include ./partials/header.ejs %>
 
 
-<div class="container">
-	<div class="row">
-		<h1>Here is the Index page</h1>
-	</div>
-	<a href="blogs/new" class="btn btn-primary">Add a new post</a>
-	<% blogs.forEach(function(blogs){ %>
-		<div class="container">
-			<h2><%= blogs.title %></h2>
-			<span><%= blogs.posted %></span>		
-			<p><%= blogs.author.substring(0,2) %></p>
-			<p><%= blogs.desc %></p>
-			<a href="/blogs/<%= blogs._id %>">Read more</a>
+<div class="container-fluid">
+	<div class="row index">
+		<div class="col-lg-10">
+			<h1>Here is the Index page</h1>
 		</div>
-	<% }) %>
+		<div class="col-lg-2">
+			<a href="blogs/new" class="btn btn-primary">Add a new post</a>
+		</div>
+	</div>
+	<div class="row col-lg-10 ">
+		<% blogs.forEach(function(blogs){ %>
+			<div class="container">
+				<h2><%= blogs.title %></h2>
+				<span><em><%= blogs.posted.toDateString() %></em></span>		
+				<p><%= blogs.author %></p>
+				<p><%- blogs.desc %></p>
+				<a href="/blogs/<%= blogs._id %>">Read more...</a>
+			</div>
+		<% }) %>
+	</div>
 </div>
 <% include ./partials/footer.ejs %>
 <!-- 

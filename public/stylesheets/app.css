@@ -1,13 +1,17 @@
 
-h1 {
+/*h1 {
 	padding-top: 30px;
 	padding-left: 10px;
 	font-size: 50px;
 }
+*/
 
+h1{
+	font-size: 3.5em;
+}
 
 .borders {
-	/*border: 1px solid black;*/
+	border: 1px solid black;
 /*	padding-bottom: 20px;*/
 }
 
@@ -28,8 +32,21 @@ p em {
 	font-size: 12px;
 }
 
-#back {
+/*#back {
 	position: fixed; bottom: 0;
 	padding-left: 10px;
 	padding-bottom: 10px;
+}*/
+
+.index {
+	padding-top: 40px;
+	padding-bottom: 30px;
+}
+
+#posts {
+	padding-bottom: 100px;
+}
+
+.form {
+	padding-top: 40px;
 }
