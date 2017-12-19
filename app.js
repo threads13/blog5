@@ -39,13 +39,17 @@ app.get("/", function(req, res){
 
 // INDEX Route
 app.get("/blogs", function(req, res){
-	Blog.find({}, function(err, blogs){
-		if(err){
-			console.log(err);
-		} else {
-			res.render("index", {blogs: blogs});
-		}
-	});;
+	Blog.find({}).sort([['posted', -1]]).exec(function(err, docs) {
+		console.log(docs);
+		res.render("index", {blogs: docs});
+			// Blog.find({}, function(err, blogs){
+			// 	if(err){
+			// 		console.log(err);
+			// 	} else {
+			// 		res.render("index", {blogs: blogs});
+			// 	}
+		// });
+	});
 });
 
 // NEW ROUTE
@@ -109,6 +113,56 @@ app.delete("/blogs/:id", function(req, res){
 		}
 	});
 });
+
+app.get("/test", function(req, res){
+	res.send("test");
+	console.log(Blog.sort(function(a, b) {
+ 		 return (new Date(b.posted)) - (new Date(a.posted))
+	}));
+});
+
+// var Point = [{
+
+//   "id": 1,
+//   "name": "A",
+//   "LastUpdate": "2016-07-08",
+//   "position": [36.8479648, 10.2793332]
+// }, {
+//   "id": 20,
+//   "name": "A",
+//   "LastUpdate": "2016-07-07",
+//   "position": [36.8791039, 10.2656209]
+// }, {
+//   "id": 3,
+//   "name": "A",
+//   "LastUpdate": "2016-07-09",
+//   "position": [36.9922751, 10.1255164]
+// }, {
+//   "id": 4,
+//   "name": "A",
+//   "LastUpdate": "2016-07-10",
+//   "position": [36.9009882, 10.3009531]
+// }, {
+//   "id": 50,
+//   "name": "A",
+//   "LastUpdate": "2016-07-04",
+//   "position": [37.2732415, 9.8713665]
+// }];
+
+// console.log(Point.sort(function(a, b) {
+//   return (new Date(b.LastUpdate)) - (new Date(a.LastUpdate))
+// }))
+
+// Blog.find().sort([['posted', 'descending']]).all(function (posts) {
+//   console.log(posts);
+// });
+
+Blog.find({}).sort([['posted', -1]]).exec(function(err, docs) {
+	console.log(docs);
+
+});
+
+console.log("SECOND TIME RUNNING MY SORT T");
 
 
 app.listen(port, hostname, () => {

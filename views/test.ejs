@@ -1,0 +1,99 @@
+
+
+var Point = [{
+
+  "id": 1,
+  "name": "A",
+  "LastUpdate": "2016-07-08",
+  "position": [36.8479648, 10.2793332]
+}, {
+  "id": 20,
+  "name": "A",
+  "LastUpdate": "2016-07-07",
+  "position": [36.8791039, 10.2656209]
+}, {
+  "id": 3,
+  "name": "A",
+  "LastUpdate": "2016-07-09",
+  "position": [36.9922751, 10.1255164]
+}, {
+  "id": 4,
+  "name": "A",
+  "LastUpdate": "2016-07-10",
+  "position": [36.9009882, 10.3009531]
+}, {
+  "id": 50,
+  "name": "A",
+  "LastUpdate": "2016-07-04",
+  "position": [37.2732415, 9.8713665]
+}];
+
+console.log(Point.sort(function(a, b) {
+  return (new Date(b.LastUpdate)) - (new Date(a.LastUpdate))
+}))
+VM107:29 (5) [{…}, {…}, {…}, {…}, {…}]0: {id: 4, name: "A", LastUpdate: "2016-07-10", position: Array(2)}1: {id: 3, name: "A", LastUpdate: "2016-07-09", position: Array(2)}2: {id: 1, name: "A", LastUpdate: "2016-07-08", position: Array(2)}3: {id: 20, name: "A", LastUpdate: "2016-07-07", position: Array(2)}4: {id: 50, name: "A", LastUpdate: "2016-07-04", position: Array(2)}length: 5__proto__: Array(0)
+undefined
+
+<% for( var i = blogs.length; i >= 0; i--){ %>
+  <div class="container bottom">
+        <h2><%= blogs.title %></h2>
+        <span><em><%= blogs.posted %></em></span>   
+        <p><%= blogs.author %></p>
+        <p><%- blogs.desc %></p>
+        <a href="/blogs/<%= blogs._id %>">Read more...</a>
+      </div>
+    <% } %>
+
+
+    <% var sorted = blogs.sort(function(a, b) { %>
+  <% return (new Date(b.posted)) - (new Date(a.posted)) %>
+<% })) %>
+
+<% console.log(sorted); %>
+
+
+
+
+// THIS snippet works.  It sorts my data and stores it in a new object called sorted.  I thien
+// can pass this new object through res.render in to my index template.  
+var Point = [{
+
+  "id": 1,
+  "name": "A",
+  "LastUpdate": "2016-07-08",
+  "position": [36.8479648, 10.2793332]
+}, {
+  "id": 20,
+  "name": "A",
+  "LastUpdate": "2016-07-07",
+  "position": [36.8791039, 10.2656209]
+}, {
+  "id": 3,
+  "name": "A",
+  "LastUpdate": "2016-07-09",
+  "position": [36.9922751, 10.1255164]
+}, {
+  "id": 4,
+  "name": "A",
+  "LastUpdate": "2016-07-10",
+  "position": [36.9009882, 10.3009531]
+}, {
+  "id": 50,
+  "name": "A",
+  "LastUpdate": "2016-07-04",
+  "position": [37.2732415, 9.8713665]
+}];
+
+var sorted = Point.sort(function(a, b) {
+  var sorted;
+  return sorted = (new Date(b.LastUpdate)) - (new Date(a.LastUpdate));
+});
+
+console.log(sorted);
+
+
+
+// WORKING console.log that shows an ordered list of posts
+Blog.find({}).sort([['posted', -1]]).exec(function(err, docs) {
+  console.log(docs);
+});
