@@ -8,6 +8,10 @@ var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var methodOverride = require("method-override");
+var passport = require("passport");
+var LocalStrategy = require("passport-local");
+var passportLocalMongoose = require("passport-local-mongoose");
+var User = require("./models/user");
 
 // APP CONFIG
 mongoose.connect("mongodb://localhost/jacob_blog2");
@@ -15,6 +19,18 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
+
+// PASSPORT CONFIG
+app.use(require("express-session")({
+	secret: "Wise men say only fools rush in",
+	resave: false,
+	saveUnitialize: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // SCHEMA SETUP
 var blogSchema = new mongoose.Schema({
@@ -162,7 +178,27 @@ Blog.find({}).sort([['posted', -1]]).exec(function(err, docs) {
 
 });
 
-console.log("SECOND TIME RUNNING MY SORT T");
+// AUTH ROUTES
+
+// show register form
+app.get("/register", function(res, res){
+	res.render("register");
+});
+
+// HANDLE SIGN UP LOGIC
+app.post("/register", function(req, res){
+	var newUser = new User({username: req.body.username});
+	User.register(newUser, req.body.password, function(err, user){
+		if(err){
+			console.log(err);
+			return res.render("register");
+		} 
+		passport.authenticate("local")(req, res, function(){
+			res.redirect("/blogs");
+			// need to research what this logis is all about by looking at previous video
+		});
+	});
+});
 
 
 app.listen(port, hostname, () => {
