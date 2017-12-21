@@ -27,13 +27,31 @@
 
 
 
-   <form class="navbar-form navbar-right navbar-nav mr-sm-2" role="search">
+   <form action="/login" class="navbar-form navbar-right navbar-nav mr-sm-2" role="search" method="POST">
+      <div class="auth">
+          <input type="text" class="form-control-sm nav-item" name="username" placeholder="Username">
+      </div>
+      <div style="margin-right: 1em;">
+          <input type="password" class="form-control-sm" name="password" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-default btn-sm">Login</button> -->
+   </form>
+   <a class="btn btn-primary btn-sm" href="/register">Register</a>
+</nav>
+
+
+
+<!-- 
                     <div class="auth">
                         <input type="text" class="form-control-sm nav-item" name="username" placeholder="Username">
                     </div>
                     <div style="margin-right: 1em;">
                         <input type="password" class="form-control-sm" name="password" placeholder="Password">
                     </div>
-                    <button type="submit" class="btn btn-default btn-sm">Sign In</button>
-                </form>
-</nav>
+                    <button type="submit" class="btn btn-default btn-sm">Login</button> -->
+
+
+                          <ui>
+<!--         <li><a href="/login" class="btn btn-primary btn-sm">Login</a></li>
+      </ui>            
+ -->    </form>

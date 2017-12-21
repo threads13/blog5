@@ -98,7 +98,7 @@ app.get("/blogs/:id", function(req, res){
 });
 
 // EDIT ROUTE
-app.get("/blogs/:id/edit", function(req, res){
+app.get("/blogs/:id/edit", isLoggedIn, function(req, res){
 	Blog.findById(req.params.id, function(err, foundBlog){
 		if(err) {
 			res.rediret("index");
@@ -109,7 +109,7 @@ app.get("/blogs/:id/edit", function(req, res){
 });
 
 // UPDATE ROUTE
-app.put("/blogs/:id", function(req, res){
+app.put("/blogs/:id", isLoggedIn, function(req, res){
 	Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
 		if(err){
 			res.redirect("/blogs");
@@ -174,7 +174,7 @@ app.get("/test", function(req, res){
 // });
 
 Blog.find({}).sort([['posted', -1]]).exec(function(err, docs) {
-	console.log(docs);
+	// console.log(docs);
 
 });
 
@@ -200,6 +200,28 @@ app.post("/register", function(req, res){
 	});
 });
 
+// SHOW LOGIN FORM
+app.get("/login", function(req, res){
+	res.render("login");
+});
+
+app.post("/login", passport.authenticate("local", 
+	{	successRedirect: "/blogs",
+		failureRedirect: "/login"
+	}), function(req, res){
+});
+
+app.get("/logout", function(req, res){
+	req.logout();
+	res.redirect("/blogs");
+})
+
+function isLoggedIn(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect("/login");
+}
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
