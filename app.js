@@ -69,7 +69,7 @@ app.get("/blogs", function(req, res){
 });
 
 // NEW ROUTE
-app.get("/blogs/new", function(req, res){
+app.get("/blogs/new", isLoggedIn, function(req, res){
 	res.render("new", {currentUser: req.user});
 });
 
@@ -120,7 +120,7 @@ app.put("/blogs/:id", isLoggedIn, function(req, res){
 });
 
 // DESTROY
-app.delete("/blogs/:id", function(req, res){
+app.delete("/blogs/:id", isLoggedIn, function(req, res){
 	Blog.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			res.redirect("/blogs");
@@ -180,9 +180,9 @@ Blog.find({}).sort([['posted', -1]]).exec(function(err, docs) {
 
 // AUTH ROUTES
 
-// show register form
-app.get("/register", function(res, res){
-	res.render("register");
+// nee do sed up functionality to stop the reister page if not logged in
+app.get("/register", isNotLoggedIn, function(req, res){
+	res.render("register", {currentUser: req.user});
 });
 
 // HANDLE SIGN UP LOGIC
@@ -201,7 +201,7 @@ app.post("/register", function(req, res){
 });
 
 // SHOW LOGIN FORM
-app.get("/login", function(req, res){
+app.get("/login", isNotLoggedIn, function(req, res){
 	res.render("login", {currentUser: req.user});
 });
 
@@ -221,6 +221,14 @@ function isLoggedIn(req, res, next){
 		return next();
 	}
 	res.redirect("/login");
+}
+
+// something about this is working but erroring - need to fix
+function isNotLoggedIn(req, res, next){
+	if(req.isAuthenticated()){
+		res.redirect("/blogs");
+	}
+	return next();
 }
 
 app.listen(port, hostname, () => {
