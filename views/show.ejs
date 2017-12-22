@@ -11,10 +11,12 @@
 			<p><%- blog.desc %></p>
 		</div>
 	</div>
+	<% if(currentUser) { %>
 	<form class="form" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
 		<a class="btn btn-success btn-sm" href="/blogs/<%= blog._id %>/edit">Edit</a>
 		<button class="btn btn-danger btn-sm">Delete</button>
 	</form>
+	<% } %>
 	<a id="back" href="/blogs">Back</a>
 
 </div>

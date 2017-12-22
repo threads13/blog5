@@ -70,7 +70,7 @@ app.get("/blogs", function(req, res){
 
 // NEW ROUTE
 app.get("/blogs/new", function(req, res){
-	res.render("new");
+	res.render("new", {currentUser: req.user});
 });
 
 // CREATE ROUTE
@@ -92,7 +92,7 @@ app.get("/blogs/:id", function(req, res){
 		if(err){
 			res.redirect("/blogs");
 		} else {
-			res.render("show", {blog: foundBlog});
+			res.render("show", {blog: foundBlog, currentUser: req.user});
 		}
 	});
 });
