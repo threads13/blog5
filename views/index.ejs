@@ -13,7 +13,7 @@
 			<div class="container bottom">
 				<h2><%= blogs.title %></h2>
 				<span><em><%= blogs.posted.toDateString() %></em></span>		
-				<p><%= blogs.author %></p>
+				<p><strong><%= blogs.author %></strong></p>
 				<p><%- blogs.desc %></p>
 				<a href="/blogs/<%= blogs._id %>">Read more...</a>
 			</div>

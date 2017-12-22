@@ -12,6 +12,7 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var passportLocalMongoose = require("passport-local-mongoose");
 var User = require("./models/user");
+var Comment = require("./models/comment");
 
 // APP CONFIG
 mongoose.connect("mongodb://localhost/jacob_blog2");
@@ -37,15 +38,15 @@ var blogSchema = new mongoose.Schema({
     author: String,
     title: String,
     desc: String,
-    posted: {type: Date, default: Date.now()} 
+    posted: {type: Date, default: Date.now()},
+    comments: [
+    	{
+    		type: mongoose.Schema.Types.ObjectId,
+    		ref: "Comment"
+    	}
+    ] 
 });
 var Blog = mongoose.model("Blog", blogSchema);
-
-// Blog.create({
-// 	author: "Jacob",
-// 	title: "Test data",
-// 	desc: "Here is some dummy data"
-// });
 
 // ROUTES
 // LANDING PAGE
@@ -88,10 +89,11 @@ app.post("/blogs", function(req, res){
 
 // SHOW ROUTE
 app.get("/blogs/:id", function(req, res){
-	Blog.findById(req.params.id, function(err, foundBlog){
+	Blog.findById(req.params.id).populate("comments").exec(function(err, foundBlog){
 		if(err){
 			res.redirect("/blogs");
 		} else {
+			console.log(foundBlog);
 			res.render("show", {blog: foundBlog, currentUser: req.user});
 		}
 	});
@@ -137,41 +139,6 @@ app.get("/test", function(req, res){
 	}));
 });
 
-// var Point = [{
-
-//   "id": 1,
-//   "name": "A",
-//   "LastUpdate": "2016-07-08",
-//   "position": [36.8479648, 10.2793332]
-// }, {
-//   "id": 20,
-//   "name": "A",
-//   "LastUpdate": "2016-07-07",
-//   "position": [36.8791039, 10.2656209]
-// }, {
-//   "id": 3,
-//   "name": "A",
-//   "LastUpdate": "2016-07-09",
-//   "position": [36.9922751, 10.1255164]
-// }, {
-//   "id": 4,
-//   "name": "A",
-//   "LastUpdate": "2016-07-10",
-//   "position": [36.9009882, 10.3009531]
-// }, {
-//   "id": 50,
-//   "name": "A",
-//   "LastUpdate": "2016-07-04",
-//   "position": [37.2732415, 9.8713665]
-// }];
-
-// console.log(Point.sort(function(a, b) {
-//   return (new Date(b.LastUpdate)) - (new Date(a.LastUpdate))
-// }))
-
-// Blog.find().sort([['posted', 'descending']]).all(function (posts) {
-//   console.log(posts);
-// });
 
 Blog.find({}).sort([['posted', -1]]).exec(function(err, docs) {
 	// console.log(docs);
@@ -215,6 +182,16 @@ app.get("/logout", function(req, res){
 	req.logout();
 	res.redirect("/blogs");
 })
+
+
+// COMMENT NEW ROUTE
+app.get("/blogs/:id/comment", function(req, res){
+	res.render("comment", {blogId: req.params.id, currentUser: req.user});
+});
+
+// will eventually do this all on one page
+// new comment page can mostly duplicate new pots page
+//  will need to pass in the post id
 
 function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()){
