@@ -56,8 +56,8 @@ app.get("/", function(req, res){
 // INDEX Route
 app.get("/blogs", function(req, res){
 	Blog.find({}).sort([['posted', -1]]).exec(function(err, docs) {
-		console.log(docs);
-		res.render("index", {blogs: docs});
+		// console.log(docs);
+		res.render("index", {blogs: docs, currentUser: req.user});
 			// Blog.find({}, function(err, blogs){
 			// 	if(err){
 			// 		console.log(err);
@@ -202,7 +202,7 @@ app.post("/register", function(req, res){
 
 // SHOW LOGIN FORM
 app.get("/login", function(req, res){
-	res.render("login");
+	res.render("login", {currentUser: req.user});
 });
 
 app.post("/login", passport.authenticate("local", 

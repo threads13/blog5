@@ -8,14 +8,26 @@
 <body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
   <a class="navbar-brand" href="/blogs">Jacob's Blog</a>
+
   <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
+      <% if(currentUser) { %>
+      <li class="nav-item active ">
       <a class="nav-link" href="blogs/new">Add New Post</a>
     </li>
-<!--     <li class="nav-item">
-      <a class="nav-link">Left Link 2</a>
-    </li> -->
+      <% }  %>
   </ul>
+
+          <% if(currentUser) { %>
+            <ul class="navbar-nav navbar-right navbar-nav">
+             <li class="navbar-item ">
+              <span class="nav-link">Welcome, <%= currentUser.username %></span>
+            </ul>
+            <a href="logout" class="btn btn-primary btn-sm">Log Out</a>
+            <% }  %>
+   
+
+
+ 
 <!--   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
       <a class="nav-link">Login</a>
@@ -26,8 +38,8 @@
   </ul> -->
 
 
-
-   <form action="/login" class="navbar-form navbar-right navbar-nav mr-sm-2" role="search" method="POST">
+    <% if(!currentUser) { %>
+    <form action="/login" class="navbar-form navbar-right navbar-nav mr-sm-2" role="search" method="POST">
       <div class="auth">
           <input type="text" class="form-control-sm nav-item" name="username" placeholder="Username">
       </div>
@@ -37,9 +49,12 @@
       <button type="submit" class="btn btn-default btn-sm">Login</button> -->
    </form>
    <a class="btn btn-primary btn-sm" href="/register">Register</a>
-</nav>
+   <% }  %>
+</nav> 
 
-
+<% if(currentUser) { %>
+<h3>The <%= currentUser.username %> is signed in</h3>
+<% } %>
 
 <!-- 
                     <div class="auth">
@@ -51,7 +66,7 @@
                     <button type="submit" class="btn btn-default btn-sm">Login</button> -->
 
 
-                          <ui>
+                         
 <!--         <li><a href="/login" class="btn btn-primary btn-sm">Login</a></li>
       </ui>            
- -->    </form>
+ -->    
