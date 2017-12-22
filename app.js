@@ -51,14 +51,14 @@ var Blog = mongoose.model("Blog", blogSchema);
 // ROUTES
 // LANDING PAGE
 app.get("/", function(req, res){
-	res.render("landing");
+	res.render("blog/landing");
 });
 
 // INDEX Route
 app.get("/blogs", function(req, res){
 	Blog.find({}).sort([['posted', -1]]).exec(function(err, docs) {
 		// console.log(docs);
-		res.render("index", {blogs: docs, currentUser: req.user});
+		res.render("blog/index", {blogs: docs, currentUser: req.user});
 			// Blog.find({}, function(err, blogs){
 			// 	if(err){
 			// 		console.log(err);
@@ -71,7 +71,7 @@ app.get("/blogs", function(req, res){
 
 // NEW ROUTE
 app.get("/blogs/new", isLoggedIn, function(req, res){
-	res.render("new", {currentUser: req.user});
+	res.render("blog/new", {currentUser: req.user});
 });
 
 // CREATE ROUTE
@@ -79,7 +79,7 @@ app.post("/blogs", function(req, res){
 	// create blog
 	Blog.create(req.body.blog, function(err, newBlog){
 		if(err){
-			res.render("new");
+			res.render("blog/new");
 		} else {
 			res.redirect("/blogs");
 		}
@@ -94,7 +94,7 @@ app.get("/blogs/:id", function(req, res){
 			res.redirect("/blogs");
 		} else {
 			console.log(foundBlog);
-			res.render("show", {blog: foundBlog, currentUser: req.user});
+			res.render("blog/show", {blog: foundBlog, currentUser: req.user});
 		}
 	});
 });
@@ -103,9 +103,9 @@ app.get("/blogs/:id", function(req, res){
 app.get("/blogs/:id/edit", isLoggedIn, function(req, res){
 	Blog.findById(req.params.id, function(err, foundBlog){
 		if(err) {
-			res.rediret("index");
+			res.rediret("blog/index");
 		} else {
-			res.render("edit", {blog: foundBlog});
+			res.render("blog/edit", {blog: foundBlog});
 		}
 	});
 });
@@ -116,7 +116,7 @@ app.put("/blogs/:id", isLoggedIn, function(req, res){
 		if(err){
 			res.redirect("/blogs");
 		} else {
-			res.redirect("/blogs/" + req.params.id);
+			res.redirect("blog/blogs/" + req.params.id);
 		}
 	});
 });
@@ -149,7 +149,7 @@ Blog.find({}).sort([['posted', -1]]).exec(function(err, docs) {
 
 // nee do sed up functionality to stop the reister page if not logged in
 app.get("/register", isNotLoggedIn, function(req, res){
-	res.render("register", {currentUser: req.user});
+	res.render("blog/register", {currentUser: req.user});
 });
 
 // HANDLE SIGN UP LOGIC
@@ -158,7 +158,7 @@ app.post("/register", function(req, res){
 	User.register(newUser, req.body.password, function(err, user){
 		if(err){
 			console.log(err);
-			return res.render("register");
+			return res.render("blog/register");
 		} 
 		passport.authenticate("local")(req, res, function(){
 			res.redirect("/blogs");
@@ -169,7 +169,7 @@ app.post("/register", function(req, res){
 
 // SHOW LOGIN FORM
 app.get("/login", isNotLoggedIn, function(req, res){
-	res.render("login", {currentUser: req.user});
+	res.render("blog/login", {currentUser: req.user});
 });
 
 app.post("/login", passport.authenticate("local", 
@@ -185,8 +185,16 @@ app.get("/logout", function(req, res){
 
 
 // COMMENT NEW ROUTE
-app.get("/blogs/:id/comment", function(req, res){
-	res.render("comment", {blogId: req.params.id, currentUser: req.user});
+app.get("/blogs/:id/comments/new", function(req, res){
+	Blog.findById(req.params.id, function(err, blog){
+		if(err){
+			console.log(err);
+		} else {
+			res.render("comments/new", {blog: blog});
+		}
+	});
+	
+	// res.render("commnets/new", {blogId: req.params.id, currentUser: req.user});
 });
 
 // will eventually do this all on one page

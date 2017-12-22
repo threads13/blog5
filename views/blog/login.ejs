@@ -1,10 +1,9 @@
-<% include ./partials/header.ejs %>
-
+<% include ../partials/header.ejs %>
 
 <div class="container-fluid">
-	<h2 class="reg">Register</h2>
+	<h2 class="reg">Login</h2>
 	<div class="container-fluid">
-		<form class="form-inline justify-content-center" action="/register" method="POST">
+		<form action="/login" method="POST" class="form-inline justify-content-center">
 			<div>
 				<div class="form-group">
 					<input class="form-control" type="text" name="username" placeholder="username">
@@ -12,12 +11,12 @@
 				<div class="form-group">
 					<input class="form-control" type="password" name="password" placeholder="password">	
 				</div>
-				<button class="btn btn-primary btn-md btn-block">Sign Up</button>
+				<button class="btn btn-primary btn-md btn-block">Login</button>
 			</div>	
-		</form>	
-	</div>
+		</form>
+	</div>	
 </div>
 
-<a href="/blogs">Back</a>
 
-<% include ./partials/footer.ejs %><% include ./partials/footer.ejs %>
+
+<% include ../partials/footer.ejs %>
