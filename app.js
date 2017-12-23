@@ -13,6 +13,7 @@ var LocalStrategy = require("passport-local");
 var passportLocalMongoose = require("passport-local-mongoose");
 var User = require("./models/user");
 var Comment = require("./models/comment");
+var Blog = require("./models/blog");
 
 // APP CONFIG
 mongoose.connect("mongodb://localhost/jacob_blog2");
@@ -34,19 +35,19 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // SCHEMA SETUP
-var blogSchema = new mongoose.Schema({
-    author: String,
-    title: String,
-    desc: String,
-    posted: {type: Date, default: Date.now()},
-    comments: [
-    	{
-    		type: mongoose.Schema.Types.ObjectId,
-    		ref: "Comment"
-    	}
-    ] 
-});
-var Blog = mongoose.model("Blog", blogSchema);
+// var blogSchema = new mongoose.Schema({
+//     author: String,
+//     title: String,
+//     desc: String,
+//     posted: {type: Date, default: Date.now()},
+//     comments: [
+//     	{
+//     		type: mongoose.Schema.Types.ObjectId,
+//     		ref: "Comment"
+//     	}
+//     ] 
+// });
+// ;
 
 // ROUTES
 // LANDING PAGE
@@ -105,7 +106,7 @@ app.get("/blogs/:id/edit", isLoggedIn, function(req, res){
 		if(err) {
 			res.rediret("blog/index");
 		} else {
-			res.render("blog/edit", {blog: foundBlog});
+			res.render("blog/edit", {blog: foundBlog, currentUser: req.user});
 		}
 	});
 });
@@ -195,6 +196,26 @@ app.get("/blogs/:id/comments/new", function(req, res){
 	});
 	
 	// res.render("commnets/new", {blogId: req.params.id, currentUser: req.user});
+});
+
+// for some reason the comment is working, but not associated with the blog model
+app.post("/blogs/:id/comments", function(req, res){
+	Blog.findById(req.params.id, function(err, blog){
+		if(err){
+			console.log(err);
+			res.redirect("/blogs");
+		} else {
+			Comment.create(req.body.comment, function(err, comment){
+				if(err){
+					console.log(err);
+				} else {
+					blog.comments.push(comment);
+					blog.save();
+					res.redirect("/blogs/" + blog._id);
+				}
+			});
+		}
+	});
 });
 
 // will eventually do this all on one page

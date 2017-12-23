@@ -4,19 +4,16 @@
 	<div class="row">
 		<div class="container">
 			<div class="container">
-				<h1 style="text-align: center">New Comment</h1>
+				<h1 style="text-align: center">Add Comment To <%= blog.title %></h1>
 			</div>
 			<div>
-				<form action="/blogs/<= blog._id %>comments" method="POST">
+				<form action="/blogs/<%= blog._id %>/comments" method="POST">
 					<div>
 						<div class="form-group">
-							<input class="form-control" type="text" name="blog[title]" placeholder="Title">
+							<input class="form-control" type="text" name="comment[author]" placeholder="Author">	
 						</div>
 						<div class="form-group">
-							<input class="form-control" type="text" name="blog[author]"    placeholder="Author">	
-						</div>
-						<div class="form-group">
-							<textarea class="form-control" name="blog[desc]" rows="25"></textarea>
+							<textarea class="form-control" name="comment[desc]" rows="25"></textarea>
 						</div>
 						<button class="btn btn-success">Post!</button>
 					</div>	
