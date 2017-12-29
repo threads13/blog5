@@ -271,7 +271,7 @@ function isNotLoggedIn(req, res, next){
 
 
 app.listen(process.env.PORT || 5000) {
-  console.log(`Server running at http://${hostname}:${port}/`);	
+  console.log(`Server running`);	
 });
 
 // app.listen(port, hostname, () => {
