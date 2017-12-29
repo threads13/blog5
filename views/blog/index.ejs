@@ -4,7 +4,8 @@
 <div class="container-fluid index">
 	<div class="row ">
 		<div class="col-lg-10">
-			<h1>Welcome to my blog!</h1>
+			<h1 class="mb-5 text-center">Jacob Hoke's Development Odessey</h1>
+		<p class="mb-5 pb-5">Here I will be de
 		</div>
 
 	</div>
@@ -12,10 +13,11 @@
 		<% blogs.forEach(function(blogs){ %>
 			<div class="container bottom">
 				<h2><%= blogs.title %></h2>
-				<span><em><%= blogs.posted.toDateString() %></em></span>		
+				<span><em><%= blogs.posted %></em></span>		
 				<p><strong><%= blogs.author %></strong></p>
 				<p><%- blogs.desc %></p>
-				<a href="/blogs/<%= blogs._id %>">Read more...</a>
+				<a class="btn btn-md btn-danger readMore" href="/blogs/<%= blogs._id %>">Read more...</a>
+				<hr>
 			</div>
 		<% }) %>
 	</div>
@@ -28,3 +30,4 @@
 <!-- 
 neeed to fix subscring issue -->
 
+<!-- toDateString() -->

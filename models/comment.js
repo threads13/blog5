@@ -1,9 +1,20 @@
 var mongoose = require("mongoose");
 
-var commentSchema = new mongoose.Schema({
-    author: String,
+// something needs to be rearranged in my comments to make the schemas match
+var commentSchema = mongoose.Schema({
     desc: String,
-    posted: {type: Date, default: Date.now()} 
+    author: String,
+
 });
 
 module.exports = mongoose.model("Comment", commentSchema);
+
+
+// var mongoose = require("mongoose");
+
+// var commentSchema = mongoose.Schema({
+//     text: String,
+//     author: String
+// });
+
+// module.exports = mongoose.model("Comment", commentSchema);

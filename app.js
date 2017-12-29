@@ -16,7 +16,9 @@ var Comment = require("./models/comment");
 var Blog = require("./models/blog");
 
 // APP CONFIG
-mongoose.connect("mongodb://localhost/jacob_blog2");
+// mongoose.connect("mongodb://localhost/jacob_blog2");
+
+mongoose.connect("mongodb://lefty:pass@ds135777.mlab.com:35777/jacobblog");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -94,7 +96,6 @@ app.get("/blogs/:id", function(req, res){
 		if(err){
 			res.redirect("/blogs");
 		} else {
-			console.log(foundBlog);
 			res.render("blog/show", {blog: foundBlog, currentUser: req.user});
 		}
 	});
@@ -199,29 +200,60 @@ app.get("/blogs/:id/comments/new", function(req, res){
 });
 
 // for some reason the comment is working, but not associated with the blog model
-app.post("/blogs/:id/comments", function(req, res){
+// app.post("/blogs/:id/comments", function(req, res){
+// 	Blog.findById(req.params.id, function(err, blog){
+// 		if(err){
+// 			// console.log(err);
+// 			res.redirect("/blogs");
+// 		} else {
+// 			Comment.create(req.body.comment, function(err, comments){
+// 				if(err){
+// 					console.log(err);
+// 				} else {
+// 					console.log(comments._id);
+// 					blog.comments.push(comments._id);
+// 					blog.save();
+// 					console.log(blog);
+// 					res.redirect("/blogs/" + blog._id);
+// 				}
+// 			});
+// 		}
+// 	});
+// });
+
+app.get("/blogs/:id/comments", function(req, res){
+	var id = mongoose.Types.ObjectId();
+	var comment = "Test comments";
 	Blog.findById(req.params.id, function(err, blog){
-		if(err){
-			console.log(err);
-			res.redirect("/blogs");
-		} else {
-			Comment.create(req.body.comment, function(err, comment){
-				if(err){
-					console.log(err);
-				} else {
-					blog.comments.push(comment);
-					blog.save();
-					res.redirect("/blogs/" + blog._id);
-				}
-			});
-		}
+		blog.comments.push(id);
+		console.log(blog);
 	});
+	res.send("Test");
 });
+
+
+
+
+
 
 // will eventually do this all on one page
 // new comment page can mostly duplicate new pots page
 //  will need to pass in the post id
 
+
+		// console.log("data in blogs variable");
+		// console.log(blog);
+
+		// 			console.log("data in comment array");
+		// 			console.log(comments);
+
+		// 									console.log("data in blogs variable **after push**");
+		// 				console.log(comments);
+		// 				console.log(blog);
+
+
+		// 				console.log("data in blogs variable **after save**");
+		// 				console.log(blog);
 function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
