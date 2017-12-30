@@ -14,6 +14,7 @@ var passportLocalMongoose = require("passport-local-mongoose");
 var User = require("./models/user");
 var Comment = require("./models/comment");
 var Blog = require("./models/blog");
+var port = process.env.PORT || 3000;
 
 // APP CONFIG
 // mongoose.connect("mongodb://localhost/jacob_blog2");
@@ -232,8 +233,9 @@ app.get("/blogs/:id/comments", function(req, res){
 });
 
 
-
-
+app.listen(port, function() {
+    console.log('Our app is running on http://localhost:' + port);
+});
 
 
 // will eventually do this all on one page
@@ -270,9 +272,7 @@ function isNotLoggedIn(req, res, next){
 }
 
 
-app.listen(process.env.PORT || 3000) {
-  console.log("Server running");	
-});
+
 
 // app.listen(port, hostname, () => {
 //   console.log(`Server running at http://${hostname}:${port}/`);
