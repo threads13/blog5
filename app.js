@@ -1,7 +1,10 @@
-// const http = require('http');
+const http = require('http');
+const hostname = '127.0.0.1';
 
-// const hostname = '127.0.0.1';
 // const port = 3000;
+
+
+const PORT = process.env.PORT || 5000
 
 var express = require("express");
 var app = express();
@@ -14,7 +17,7 @@ var passportLocalMongoose = require("passport-local-mongoose");
 var User = require("./models/user");
 var Comment = require("./models/comment");
 var Blog = require("./models/blog");
-var port = process.env.PORT || 3000;
+// var port = process.env.PORT || 3000;
 
 // APP CONFIG
 // mongoose.connect("mongodb://localhost/jacob_blog2");
@@ -232,10 +235,10 @@ app.get("/blogs/:id/comments", function(req, res){
 	res.send("Test");
 });
 
-
-app.listen(port, function() {
-    console.log('Our app is running on http://localhost:' + port);
-});
+// app.listen(process.env.PORT || 5000);
+// app.listen(port, function() {
+//     console.log('Our app is running on http://localhost:' + port);
+// });
 
 
 // will eventually do this all on one page
@@ -274,6 +277,6 @@ function isNotLoggedIn(req, res, next){
 
 
 
-// app.listen(port, hostname, () => {
-//   console.log(`Server running at http://${hostname}:${port}/`);
-// });
+app.listen(PORT, hostname, () => {
+  console.log(`Server running at http://${hostname}:${PORT}/`);
+});
