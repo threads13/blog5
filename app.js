@@ -256,6 +256,7 @@ app.get("/blogs/:id/comments", function(req, res){
 
 		// 				console.log("data in blogs variable **after save**");
 		// 				console.log(blog);
+		
 function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
