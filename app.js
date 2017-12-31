@@ -55,7 +55,7 @@ passport.deserializeUser(User.deserializeUser());
 // ROUTES
 // LANDING PAGE
 app.get("/", function(req, res){
-	res.render("blog/landing");
+	res.render("landing");
 });
 
 // INDEX Route
