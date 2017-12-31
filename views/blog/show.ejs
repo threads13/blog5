@@ -10,6 +10,11 @@
 		<div id="desc">
 			<p><%- blog.desc %></p>
 		</div>
+		<div>
+			<p>
+
+			</p>
+		</div>
 	</div>
 	<% if(currentUser) { %>
 	<form class="form" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
@@ -18,8 +23,7 @@
 	</form>
 	<% } %>
 	
-
-
+<%= comments %>
 </div>
 
 

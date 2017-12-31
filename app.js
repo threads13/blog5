@@ -97,7 +97,10 @@ app.get("/blogs/:id", function(req, res){
 		if(err){
 			res.redirect("/blogs");
 		} else {
-			res.render("blog/show", {blog: foundBlog, currentUser: req.user});
+			Blog.find({author: 'asdasd'}).populate('comments').exec(function (err, comments) {
+				console.log(comments)
+				res.render("blog/show", {blog: foundBlog, currentUser: req.user, comments: comments});
+			});
 		}
 	});
 });
@@ -228,7 +231,11 @@ app.get("/blogs/:id/comments", function(req, res){
 	Blog.findById(req.params.id, function(err, blog){
 		blog.comments.push(id);
 		console.log(blog);
+		// blogschema.findOne({author: 'asdasd'}).populate('comments').exec(function (err, comments) {console.log(comments)})
+
 	});
+	Blog.findOne({author: 'asdasd'}).populate('comments').exec(function (err, comments) {console.log(comments)})
+
 	res.send("Test");
 });
 
