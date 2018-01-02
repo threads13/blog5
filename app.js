@@ -98,7 +98,7 @@ app.get("/blogs/:id", function(req, res){
 			res.redirect("/blogs");
 		} else {
 			Blog.find({author: 'asdasd'}).populate('comments').exec(function (err, comments) {
-				console.log(comments)
+				console.log(comments);
 				res.render("blog/show", {blog: foundBlog, currentUser: req.user, comments: comments});
 			});
 		}
@@ -230,11 +230,12 @@ app.get("/blogs/:id/comments", function(req, res){
 	var comment = "Test comments";
 	Blog.findById(req.params.id, function(err, blog){
 		blog.comments.push(id);
-		console.log(blog);
+		blog.save();
+		// console.log(blog);
 		// blogschema.findOne({author: 'asdasd'}).populate('comments').exec(function (err, comments) {console.log(comments)})
 
 	});
-	Blog.findOne({author: 'asdasd'}).populate('comments').exec(function (err, comments) {console.log(comments)})
+	Blog.findOne({author: 'nick'}).populate('comments').exec(function (err, comments) {console.log(comments)})
 
 	res.send("Test");
 });
