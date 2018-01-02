@@ -17,9 +17,9 @@ var Comment = require("./models/comment");
 var Blog = require("./models/blog");
 
 // APP CONFIG
-// mongoose.connect("mongodb://localhost/jacob_blog2");
+mongoose.connect("mongodb://localhost/jacob_blog2");
 
-mongoose.connect("mongodb://lefty:pass@ds135777.mlab.com:35777/jacobblog");
+// mongoose.connect("mongodb://lefty:pass@ds135777.mlab.com:35777/jacobblog");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -229,7 +229,7 @@ app.get("/blogs/:id/comments", function(req, res){
 	var id = mongoose.Types.ObjectId();
 	var comment = "Test comments";
 	Blog.findById(req.params.id, function(err, blog){
-		blog.comments.push(id);
+		blog.comments.push(id, comments);
 		blog.save();
 		// console.log(blog);
 		// blogschema.findOne({author: 'asdasd'}).populate('comments').exec(function (err, comments) {console.log(comments)})
