@@ -4,15 +4,34 @@ var blogSchema = new mongoose.Schema({
     author: String,
     title: String,
     desc: String,
-    comments: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Comment"
-        }
-    ]
-});
+	comments:[
+	{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Comment"
+	}
+	]
+	}, {usePushEach: true});
 
 module.exports = mongoose.model("Blog", blogSchema);
+
+
+
+// var mongoose = require("mongoose");
+
+// var blogSchema = new mongoose.Schema({
+//     author: String,
+//     title: String,
+//     desc: String,
+//     comments: [
+//         {
+//             type: mongoose.Schema.Types.ObjectId,
+//             ref: "Comment"
+//         }
+//     ],
+//     // usePushEach: true 
+// });
+
+// module.exports = mongoose.model("Blog", blogSchema);
 
 
 // // var blogSchema = mongoose.Schema({

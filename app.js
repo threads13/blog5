@@ -37,21 +37,6 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// SCHEMA SETUP
-// var blogSchema = new mongoose.Schema({
-//     author: String,
-//     title: String,
-//     desc: String,
-//     posted: {type: Date, default: Date.now()},
-//     comments: [
-//     	{
-//     		type: mongoose.Schema.Types.ObjectId,
-//     		ref: "Comment"
-//     	}
-//     ] 
-// });
-// ;
-
 // ROUTES
 // LANDING PAGE
 app.get("/", function(req, res){
@@ -227,16 +212,39 @@ app.get("/blogs/:id/comments/new", function(req, res){
 
 app.get("/blogs/:id/comments", function(req, res){
 	var id = mongoose.Types.ObjectId();
-	var comment = "Test comments";
+	var comment = "TestComments";
+	console.log(id);
+	console.log(comment);
 	Blog.findById(req.params.id, function(err, blog){
-		blog.comments.push(id, comments);
-		blog.save();
-		// console.log(blog);
+		blog.comments.push(blog);
+		// blog.save();
+		blog.save(function(err, blog){
+			if(err){
+				console.log(err);
+			} 
+		});
+		console.log("BLOG");
+		console.log(blog);
+
+		console.log("blog title");
+		console.log(blog.title);
+
+		console.log("blog comment");
+		console.log(blog.comment);
+
+		console.log("blog id");
+		console.log(blog._id);
+
+		console.log(comment);
+
+
+		console.log(blog);
 		// blogschema.findOne({author: 'asdasd'}).populate('comments').exec(function (err, comments) {console.log(comments)})
 
 	});
-	Blog.findOne({author: 'nick'}).populate('comments').exec(function (err, comments) {console.log(comments)})
-
+	// Blog.findOne({author: 'nick'}).populate('comments').exec(function (err, comments) {console.log(comments)})
+	// console.log("after function");
+	// console.log()
 	res.send("Test");
 });
 

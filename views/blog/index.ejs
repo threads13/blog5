@@ -2,26 +2,31 @@
 
 
 <div class="container-fluid index">
-	<div class="row ">
+	<div class="row">
 		<div class="col-lg-10">
-			<h1 class="mb-5 text-center">Jacob's Development Odessey</h1>
-		<p class="mb-5 pb-5">Here I will be de
+			<h1 class="mb-5" id="under" >Jacob's Development Odessey</h1>
+			<p class="mb-5 pb-5 subtitle">Here I will be writing more about my work</p>
 		</div>
-
 	</div>
+
+
 	<div class="row col-lg-10 index">
 		<% blogs.forEach(function(blogs){ %>
-			<div class="container bottom">
-				<h2><%= blogs.title %></h2>
+			<div class="container-fluid bottom">
+				<h3><%= blogs.title %></h3>
 				<span><em><%= blogs.posted %></em></span>		
-				<p><strong><%= blogs.author %></strong></p>
+				<p class="author"><strong><%= blogs.author %></strong></p>
 				<p><%- blogs.desc %></p>
-				<a class="btn btn-md btn-danger readMore" href="/blogs/<%= blogs._id %>">Read more...</a>
+				<a class="btn btn-md btn-danger readMor" href="/blogs/<%= blogs._id %>">Read more...</a>
 				<hr>
 			</div>
 		<% }) %>
+		<div>
+			<p> hi </p>
+		</div>
 	</div>
 </div>
+
 
 
 

@@ -6,14 +6,30 @@
 }
 */
 
+body{
+	font-family: 'Quicksand', sans-serif;
+}
+
 .auth{
 	margin-right: .5em;
 }
 
 h1{
 	font-size: 2m;
+	font-family: 'Quicksand', sans-serif;
 	
 }
+
+#under{
+	margin-bottom: .2rem!important;
+
+}
+
+.subtitle {
+	color: #B4B0B0;
+}
+
+
 
 .borders {
 	border: 1px solid black;
@@ -24,8 +40,14 @@ h1{
 	padding-top: 15px;
 }
 
-#author a {
-	color: black;
+.author {
+	color: #36A64C;
+	font-family: 'Caveat', cursive;
+	font-size: 1.25em;
+}
+
+.author a {
+	color: #6E9AF8;
 	font-family: bold;
 	font-size: 20px;
 }
