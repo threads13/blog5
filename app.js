@@ -189,64 +189,74 @@ app.get("/blogs/:id/comments/new", function(req, res){
 });
 
 // for some reason the comment is working, but not associated with the blog model
-// app.post("/blogs/:id/comments", function(req, res){
-// 	Blog.findById(req.params.id, function(err, blog){
-// 		if(err){
-// 			// console.log(err);
-// 			res.redirect("/blogs");
-// 		} else {
-// 			Comment.create(req.body.comment, function(err, comments){
-// 				if(err){
-// 					console.log(err);
-// 				} else {
-// 					console.log(comments._id);
-// 					blog.comments.push(comments._id);
-// 					blog.save();
-// 					console.log(blog);
-// 					res.redirect("/blogs/" + blog._id);
-// 				}
-// 			});
-// 		}
-// 	});
-// });
-
-app.get("/blogs/:id/comments", function(req, res){
-	var id = mongoose.Types.ObjectId();
-	var comment = "TestComments";
-	console.log(id);
-	console.log(comment);
+app.post("/blogs/:id/comments", function(req, res){
 	Blog.findById(req.params.id, function(err, blog){
-		blog.comments.push(blog);
-		// blog.save();
-		blog.save(function(err, blog){
-			if(err){
-				console.log(err);
-			} 
-		});
-		console.log("BLOG");
-		console.log(blog);
-
-		console.log("blog title");
-		console.log(blog.title);
-
-		console.log("blog comment");
-		console.log(blog.comment);
-
-		console.log("blog id");
-		console.log(blog._id);
-
-		console.log(comment);
-
-
-		console.log(blog);
-		// blogschema.findOne({author: 'asdasd'}).populate('comments').exec(function (err, comments) {console.log(comments)})
-
+		if(err){
+			console.log(err);
+			res.redirect("/blogs");
+		} else {
+			Comment.create(req.body.comment, function(err, comments){
+				if(err){
+					console.log(err);
+				} else {
+					console.log(comments._id);
+					blog.comments.push(comments._id);
+					blog.save(function(err){
+						if(err) {
+							console.log(err);
+							res.redict("/blogs");
+						}
+					});
+					console.log(blog);
+					res.redirect("/blogs/" + blog._id);
+				}
+			});
+		}
 	});
-	// Blog.findOne({author: 'nick'}).populate('comments').exec(function (err, comments) {console.log(comments)})
-	// console.log("after function");
-	// console.log()
-	res.send("Test");
 });
+
+
+
+// *******
+// here the comment id is being created and pushing correctly
+// the next step is to see if it associates correctly 
+// app.get("/blogs/:id/comments", function(req, res){
+// 	var id = mongoose.Types.ObjectId();
+// 	var comment = "TestComments";
+// 	console.log(id);
+// 	console.log(comment);
+// 	Blog.findById(req.params.id, function(err, blog){
+// 		blog.comments.push(blog);
+// 		// blog.save();
+// 		blog.save(function(err, blog){
+// 			if(err){
+// 				console.log(err);
+// 			} 
+// 		});
+// 		console.log("BLOG");
+// 		console.log(blog);
+
+// 		console.log("blog title");
+// 		console.log(blog.title);
+
+// 		console.log("blog comment");
+// 		console.log(blog.comment);
+
+// 		console.log("blog id");
+// 		console.log(blog._id);
+
+// 		console.log(comment);
+
+
+// 		console.log(blog);
+// 		// blogschema.findOne({author: 'asdasd'}).populate('comments').exec(function (err, comments) {console.log(comments)})
+
+// 	});
+// 	// Blog.findOne({author: 'nick'}).populate('comments').exec(function (err, comments) {console.log(comments)})
+// 	// console.log("after function");
+// 	// console.log()
+// 	res.send("Test");
+// });
 
 // app.listen(process.env.PORT || 5000);
 // app.listen(port, function() {
