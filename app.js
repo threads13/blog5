@@ -76,16 +76,17 @@ app.post("/blogs", function(req, res){
 	// redirect
 });
 
+// need to set up the show route properly -  the else statement is finding an author in a silly way
+// that is likely from me trying
 // SHOW ROUTE
 app.get("/blogs/:id", function(req, res){
 	Blog.findById(req.params.id).populate("comments").exec(function(err, foundBlog){
 		if(err){
 			res.redirect("/blogs");
 		} else {
-			Blog.find({author: 'asdasd'}).populate('comments').exec(function (err, comments) {
-				console.log(comments);
-				res.render("blog/show", {blog: foundBlog, currentUser: req.user, comments: comments});
-			});
+
+				res.render("blog/show", {blog: foundBlog, currentUser: req.user});
+
 		}
 	});
 });
@@ -195,20 +196,20 @@ app.post("/blogs/:id/comments", function(req, res){
 			console.log(err);
 			res.redirect("/blogs");
 		} else {
-			Comment.create(req.body.comment, function(err, comments){
+			Comment.create(req.body.comments, function(err, comments){
 				if(err){
 					console.log(err);
 				} else {
-					console.log(comments._id);
-					blog.comments.push(comments._id);
+					blog.comments.push(comments);
 					blog.save(function(err){
 						if(err) {
 							console.log(err);
-							res.redict("/blogs");
+							res.redict("/blogs/" + blog._id);
+						} else {
+							console.log(blog);
+							res.redirect("/blogs/" + blog._id);
 						}
 					});
-					console.log(blog);
-					res.redirect("/blogs/" + blog._id);
 				}
 			});
 		}

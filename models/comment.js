@@ -4,6 +4,7 @@ var mongoose = require("mongoose");
 var commentSchema = mongoose.Schema({
     desc: String,
     author: String,
+    posted: {type: Date, default: Date.now()}
     // { usePushEach: true }
 });
 

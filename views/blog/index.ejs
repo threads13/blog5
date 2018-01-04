@@ -14,7 +14,7 @@
 		<% blogs.forEach(function(blogs){ %>
 			<div class="container-fluid bottom">
 				<h3><%= blogs.title %></h3>
-				<span><em><%= blogs.posted %></em></span>		
+				<span><em><%= blogs.posted.toDateString() %></em></span>		
 				<p class="author"><strong><%= blogs.author %></strong></p>
 				<p><%- blogs.desc %></p>
 				<a class="btn btn-md btn-danger readMor" href="/blogs/<%= blogs._id %>">Read more...</a>

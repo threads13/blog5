@@ -4,6 +4,7 @@ var blogSchema = new mongoose.Schema({
     author: String,
     title: String,
     desc: String,
+    posted: {type: Date, default: Date.now()},
 	comments:[
 	{
 		type: mongoose.Schema.Types.ObjectId,

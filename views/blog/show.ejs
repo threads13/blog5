@@ -11,9 +11,11 @@
 			<p><%- blog.desc %></p>
 		</div>
 		<div>
-			<p>
-
-			</p>
+			<% blog.comments.forEach(function(comment){ %>
+	    		<p><strong><%= comment.author %></strong></p>
+	    		<p><%= comment.posted.toDateString() %></p>
+	        	<p><%= comment.desc %></p>
+			<% }) %>
 		</div>
 	</div>
 	<% if(currentUser) { %>
@@ -22,10 +24,6 @@
 		<button class="btn btn-danger btn-sm">Delete</button>
 	</form>
 	<% } %>
-	
-
-<p><%= comments %></p>
-<p><%= blog.comments.author %></p>
 </div>
 
 
