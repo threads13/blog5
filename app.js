@@ -182,7 +182,7 @@ app.get("/blogs/:id/comments/new", function(req, res){
 		if(err){
 			console.log(err);
 		} else {
-			res.render("comments/new", {blog: blog});
+			res.render("comments/new", {blog: blog, currentUser: req.user});
 		}
 	});
 	

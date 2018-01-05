@@ -1,16 +1,17 @@
-
+<% include ../partials/header.ejs %>
 
 <div class="container">
 	<div class="row">
 		<div class="container">
-			<div class="container">
-				<h1 style="text-align: center">Add Comment To <%= blog.title %></h1>
+			<div class="container" style="text-align: center">
+				<h2>Add Comment To</h2>
+				<h4>"<%= blog.title %>"</h4>
 			</div>
 			<div>
 				<form action="/blogs/<%= blog._id %>/comments" method="POST">
 					<div>
 						<div class="form-group">
-							<input class="form-control" type="text" name="comments[author]" placeholder="Author">	
+							<input class="form-control" type="text" name="comments[author]" placeholder="<%=blog.author %>">	
 						</div>
 						<div class="form-group">
 							<textarea class="form-control" name="comments[desc]" rows="25"></textarea>
@@ -23,3 +24,4 @@
 	</div>
 </div>
 
+<% include ../partials/footer.ejs %>

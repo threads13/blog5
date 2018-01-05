@@ -6,7 +6,14 @@
 }
 */
 
-body{
+.postComments {
+	margin-top: 3em;
+}
+
+.commentAuthor {
+	margin-top: 1em;
+}
+*{
 	font-family: 'Quicksand', sans-serif;
 }
 

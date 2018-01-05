@@ -1,7 +1,14 @@
 <% include ../partials/header.ejs %>
 
 <div class="container-fluid form">
-	<h2><%= blog.title %></h2>
+	<% if(currentUser) { %>
+		<a href="<%=blog._id %>/comments/new" class="btn btn-md btn-primary float-right col-md-3">Post New Comment</a>
+	<% } %>
+	<div class="thumbnail">
+		<h2 class="col-md-9"><%= blog.title %></h2>
+	</div>
+
+
 	<div class="container-fluid">
 		<div>
 			<p>Written by <strong id="author"><a href=""><%= blog.author %></a></strong></p>
@@ -11,20 +18,24 @@
 			<p><%- blog.desc %></p>
 		</div>
 		<div>
+			<% if(currentUser) { %>
+				<form class="form" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
+					<a class="btn btn-success btn-sm" href="/blogs/<%= blog._id %>/edit">Edit Post</a>
+					<button class="btn btn-danger btn-sm">Delete</button>
+				</form>
+			<% } %>
+		</div>
+		<div class="card bg-light col-md-8 postComments">
+
 			<% blog.comments.forEach(function(comment){ %>
-	    		<p><strong><%= comment.author %></strong></p>
-	    		<p><%= comment.posted.toDateString() %></p>
+	    		<p class="commentAuthor"><strong><%= comment.author %></strong></p>
+	    		<p><em><%= comment.posted.toDateString() %></em></p>
 	        	<p><%= comment.desc %></p>
+	        	<hr>
 			<% }) %>
+
 		</div>
 	</div>
-	<% if(currentUser) { %>
-	<form class="form" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
-		<a class="btn btn-success btn-sm" href="/blogs/<%= blog._id %>/edit">Edit</a>
-		<button class="btn btn-danger btn-sm">Delete</button>
-	</form>
-	<% } %>
+
 </div>
-
-
 <% include ../partials/footer.ejs %>
