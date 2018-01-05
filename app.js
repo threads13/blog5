@@ -108,7 +108,7 @@ app.put("/blogs/:id", isLoggedIn, function(req, res){
 		if(err){
 			res.redirect("/blogs");
 		} else {
-			res.redirect("blog/blogs/" + req.params.id);
+			res.redirect("/blogs/" + req.params.id);
 		}
 	});
 });
