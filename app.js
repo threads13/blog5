@@ -125,10 +125,8 @@ app.delete("/blogs/:id", isLoggedIn, function(req, res){
 });
 
 app.get("/test", function(req, res){
-	res.send("test");
-	console.log(Blog.sort(function(a, b) {
- 		 return (new Date(b.posted)) - (new Date(a.posted))
-	}));
+	res.render("blog/test2");
+
 });
 
 
