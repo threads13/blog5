@@ -2,15 +2,15 @@
 <html>
 <head>
     <title>Jacob Development Blog</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
     <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=xgd40b9f841pg0vji5v00nuyai5v882vguefqnqxugffro2o"></script>
-  <script>tinymce.init({ selector:'textarea' });</script>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=xgd40b9f841pg0vji5v00nuyai5v882vguefqnqxugffro2o"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
+<nav class="navbar navbar-fixed-top navbar-expand-sm navbar-dark bg-dark ">
   <a class="navbar-brand" href="/blogs">Jacob's Blog</a>
 
   <ul class="navbar-nav mr-auto">
@@ -20,7 +20,6 @@
     </li>
       <% }  %>
   </ul>
-
           <% if(currentUser) { %>
             <ul class="navbar-nav navbar-right navbar-nav">
              <li class="navbar-item ">
@@ -29,9 +28,6 @@
             <a href="logout" class="btn btn-primary btn-sm">Log Out</a>
             <% }  %>
    
-
-
- 
 <!--   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
       <a class="nav-link">Login</a>
@@ -41,9 +37,9 @@
     </li>
   </ul> -->
 
-
     <% if(!currentUser) { %>
-    <form action="/login" class="navbar-form navbar-right navbar-nav mr-sm-2" role="search" method="POST">
+
+    <form action="/login" class="navbar-form navbar-right navbar-nav mr-sm-2 collapse navbar-toggleable-xs" role="search" method="POST">
       <div class="auth">
           <input type="text" class="form-control-sm nav-item" name="username" placeholder="Username">
       </div>
@@ -53,6 +49,7 @@
       <button type="submit" class="btn btn-default btn-sm">Login</button> -->
    </form>
    <a class="btn btn-primary btn-sm" href="/register">Register</a>
+
    <% }  %>
 </nav> 
 

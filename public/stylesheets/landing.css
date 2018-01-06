@@ -1,0 +1,25 @@
+h1 {
+	text-align: center;
+	color: white;
+}
+
+body {
+  background-image: url(https://images.unsplash.com/photo-1500283265283-63cc4f18a97b?auto=format&fit=crop&w=1050&q=80);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+
+
+}
+
+
+
+#landing-header {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 30vh;
+}

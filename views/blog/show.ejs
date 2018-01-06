@@ -7,8 +7,6 @@
 	<div class="thumbnail">
 		<h2 class="col-md-9"><%= blog.title %></h2>
 	</div>
-
-
 	<div class="container-fluid">
 		<div>
 			<p>Written by <strong id="author"><a href=""><%= blog.author %></a></strong></p>
@@ -26,14 +24,13 @@
 			<% } %>
 		</div>
 		<div class="card bg-light col-md-8 postComments">
-
 			<% blog.comments.forEach(function(comment){ %>
-	    		<p class="commentAuthor"><strong><%= comment.author %></strong></p>
-	    		<p><em><%= comment.posted.toDateString() %></em></p>
+	    		<p class="commentAuthor card-title"><strong class=""><%= comment.author %></strong>
+	    		<em><%= comment.posted.toDateString() %></em></p>	    		
+	    		<blockquote class="card-text">
 	        	<p><%= comment.desc %></p>
-	        	<hr>
+	        	</blockquote>
 			<% }) %>
-
 		</div>
 	</div>
 
