@@ -3,13 +3,10 @@ var router  = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
 
-// ROUTES
 // LANDING PAGE
 router.get("/", function(req, res){
 	res.render("landing");
 });
-
-
 // AUTH ROUTES
 
 // nee do sed up functionality to stop the reister page if not logged in

@@ -14,6 +14,7 @@ var passportLocalMongoose = require("passport-local-mongoose"),
                   express = require("express")
                       app = express();
 
+// REQUIRING ROUTES
 var commentRoutes = require("./routes/comments");
 var blogRoutes    = require("./routes/blogs");
 var indexRoutes   = require("./routes/index");
@@ -39,30 +40,10 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use(commentRoutes);
-app.use(blogRoutes);
+app.use("/blogs/:id/comments",commentRoutes);
+app.use("/blogs", blogRoutes);
 app.use(indexRoutes);
-
-function isLoggedIn(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	}
-	res.redirect("/login");
-}
-
-// something about this is working but erroring - need to fix
-function isNotLoggedIn(req, res, next){
-	if(req.isAuthenticated()){
-		res.redirect("/blogs");
-	}
-	return next();
-}
-
 
 app.listen(PORT, function() {
     console.log("App is running on port " + PORT);
 });
-
-// app.listen(PORT, hostname, () => {
-//   console.log(`Server running at http://${hostname}:${PORT}/`);
-// });

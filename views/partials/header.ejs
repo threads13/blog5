@@ -6,70 +6,32 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
     <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=xgd40b9f841pg0vji5v00nuyai5v882vguefqnqxugffro2o"></script>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=xgd40b9f841pg0vji5v00nuyai5v882vguefqnqxugffro2o">
+    </script>
     <script>tinymce.init({ selector:'textarea' });</script>
 </head>
 <body>
-<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark ">
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
   <a class="navbar-brand" href="/blogs">Jacob's Blog</a>
-
   <ul class="navbar-nav mr-auto">
-<!--       If current user, add new post lind -->
       <% if(currentUser) { %>
-        <li class="nav-item active ">
-          <a class="nav-link" href="/blogs/new">Add New Post</a>
-        </li>
+          <li class="nav-item active ">
+            <a class="nav-link" href="/blogs/new">Add New Post</a>
+          </li>
       <% }  %>
   </ul>
-<!--       If current user, add a welcmoe user text -->
       <% if(currentUser) { %>
         <ul class="navbar-nav navbar-right navbar-nav">
           <li class="navbar-item ">
-          <span class="nav-link">Welcome, <%= currentUser.username %></span>
+            <span class="nav-link">Welcome, <%= currentUser.username %></span>
+          </li>
         </ul>
         <a href="logout" class="btn btn-primary btn-sm">Log Out</a>
-     <% }  %>
-   
-<!--   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link">Login</a>
-    </li>
-    <li class="navbar-item">
-      <a class="nav-link">Sign up</a>
-    </li>
-  </ul> -->
-
+      <% }  %>
     <% if(!currentUser) { %>
-    <div>
-    <a href="/login" class="btn btn-secondary btn-sm">Login</a>
-    <a href="/register" class="btn btn-primary btn-sm" >Register</a>
-    <div>
+      <div>
+        <a href="/login" class="btn btn-secondary btn-sm">Login</a>
+        <a href="/register" class="btn btn-primary btn-sm">Register</a>
+      </div>
    <% }  %>
 </nav> 
-
-
-<!-- 
-                    <div class="auth">
-                        <input type="text" class="form-control-sm nav-item" name="username" placeholder="Username">
-                    </div>
-                    <div style="margin-right: 1em;">
-                        <input type="password" class="form-control-sm" name="password" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-default btn-sm">Login</button> -->
-
-
-                         
-<!--         <li><a href="/login" class="btn btn-primary btn-sm">Login</a></li>
-      </ui>
-
-          <form action="/login" class="navbar-form navbar-right navbar-nav mr-sm-2 collapse navbar-toggleable-xs" role="search" method="POST">
-      <div class="auth">
-          <input type="text" class="form-control-sm nav-item" name="username" placeholder="Username">
-      </div>
-      <div style="margin-right: 1em;">
-          <input type="password" class="form-control-sm" name="password" placeholder="Password">
-      </div>
-      <button type="submit" class="btn btn-default btn-sm">Login</button> -->
-<!--    </form>
-   <a class="btn btn-primary btn-sm" href="/register">Register</a>            
- -->   -->  

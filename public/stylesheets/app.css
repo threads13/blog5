@@ -1,24 +1,5 @@
-
-/*h1 {
-	padding-top: 30px;
-	padding-left: 10px;
-	font-size: 50px;
-}
-*/
-
-.postComments {
-	margin-top: 3em;
-}
-
-.commentAuthor {
-	margin-top: 1em;
-}
 *{
 	font-family: 'Quicksand', sans-serif;
-}
-
-.auth{
-	margin-right: .5em;
 }
 
 h1{
@@ -27,24 +8,18 @@ h1{
 	
 }
 
-#under{
-	margin-bottom: .2rem!important;
-
+p em {
+	padding-left: 8px;
+	padding-top: 0px;
+	margin: 0;
+	font-size: 12px;
 }
 
-.subtitle {
-	color: #B4B0B0;
+.postComments {
+	margin-top: 3em;
 }
-
-
-
-.borders {
-	border: 1px solid black;
-/*	padding-bottom: 20px;*/
-}
-
-#desc {
-	padding-top: 15px;
+.commentAuthor {
+	margin-top: 1em;
 }
 
 .author {
@@ -59,36 +34,13 @@ h1{
 	font-size: 20px;
 }
 
-p em {
-	padding-left: 8px;
-	padding-top: 0px;
-	margin: 0;
-	font-size: 12px;
-}
-
-/*#back {
-	position: fixed; bottom: 0;
-	padding-left: 10px;
-	padding-bottom: 10px;
-}*/
-
 .index {
-	padding-top: 40px;
+	padding-top: 80px;
 	padding-bottom: 30px;
 }
 
-#posts {
-	padding-bottom: 100px;
-}
-
-
-
-.form {
-	padding-top: 40px;
-}
-
-.bottom {
-	padding-bottom: 50px;
+.nav-link {
+	font-size: .8em;
 }
 
 .form-control{
@@ -97,15 +49,72 @@ p em {
 
 .reg{
 	text-align: center; 
-	margin-top: 3em;
+
 	margin-bottom: 1em;
 }
 
-.nav-link {
-	font-size: .8em;
+#under{
+	margin-bottom: .2rem!important;
 }
+
+
+
+.bottom {
+	padding-bottom: 50px;
+}
+
+
+#desc {
+	padding-top: 15px;
+}
+
+
+
+/*.form {
+	padding-top: 40px;
+}
+*/
+
+/*
+.auth{
+	margin-right: .5em;
+}
+
+
+
+
+.subtitle {
+	color: #B4B0B0;
+}
+
+
+
+.borders {
+	border: 1px solid black;
+	padding-bottom: 20px;
+}
+
+
+
+
+
+
+#posts {
+	padding-bottom: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 .readMore {
 	margin-bottom: 1em;
 	margin-top: 1em;
-}
+}*/

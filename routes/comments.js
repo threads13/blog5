@@ -1,10 +1,10 @@
 var express = require("express");
-var router  = express.Router();
+var router  = express.Router({mergeParams: true});
 var Blog    = require("../models/blog");
 var Comment = require("../models/comment");
 
 // COMMENT NEW ROUTE
-router.get("/blogs/:id/comments/new", function(req, res){
+router.get("/new", function(req, res){
 	Blog.findById(req.params.id, function(err, blog){
 		if(err){
 			console.log(err);
@@ -12,12 +12,10 @@ router.get("/blogs/:id/comments/new", function(req, res){
 			res.render("comments/new", {blog: blog, currentUser: req.user});
 		}
 	});
-	
-	// res.render("commnets/new", {blogId: req.params.id, currentUser: req.user});
 });
 
 // for some reason the comment is working, but not associated with the blog model
-router.post("/blogs/:id/comments", function(req, res){
+router.post("/", function(req, res){
 	Blog.findById(req.params.id, function(err, blog){
 		if(err){
 			console.log(err);
