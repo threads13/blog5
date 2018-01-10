@@ -2,6 +2,7 @@ var express = require("express");
 var router  = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
+var middleware = require("../middleware");
 
 // LANDING PAGE
 router.get("/", function(req, res){
@@ -10,7 +11,7 @@ router.get("/", function(req, res){
 // AUTH ROUTES
 
 // nee do sed up functionality to stop the reister page if not logged in
-router.get("/register", isNotLoggedIn, function(req, res){
+router.get("/register", middleware.isNotLoggedIn, function(req, res){
 	res.render("blog/register", {currentUser: req.user});
 });
 
@@ -30,7 +31,7 @@ router.post("/register", function(req, res){
 });
 
 // SHOW LOGIN FORM
-router.get("/login", isNotLoggedIn, function(req, res){
+router.get("/login", middleware.isNotLoggedIn, function(req, res){
 	res.render("blog/login", {currentUser: req.user});
 });
 
@@ -44,20 +45,4 @@ router.get("/logout", function(req, res){
 	req.logout();
 	res.redirect("/blogs");
 })
-
-function isLoggedIn(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	}
-	res.redirect("/login");
-}
-
-// something about this is working but erroring - need to fix
-function isNotLoggedIn(req, res, next){
-	if(req.isAuthenticated()){
-		res.redirect("/blogs");
-	}
-	return next();
-}
-
 module.exports = router;

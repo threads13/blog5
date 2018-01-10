@@ -2,6 +2,7 @@ var express = require("express");
 var router  = express.Router({mergeParams: true});
 var Blog    = require("../models/blog");
 var Comment = require("../models/comment");
+var middleware = require("../middleware");
 
 // COMMENT NEW ROUTE
 router.get("/new", function(req, res){
@@ -40,20 +41,5 @@ router.post("/", function(req, res){
 		}
 	});
 });
-
-function isLoggedIn(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	}
-	res.redirect("/login");
-}
-
-// something about this is working but erroring - need to fix
-function isNotLoggedIn(req, res, next){
-	if(req.isAuthenticated()){
-		res.redirect("/blogs");
-	}
-	return next();
-}
 
 module.exports = router;

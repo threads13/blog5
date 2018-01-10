@@ -1,6 +1,7 @@
-var express = require("express");
-var router  = express.Router();
-var Blog    = require("../models/blog");
+var express    = require("express");
+var router     = express.Router();
+var Blog       = require("../models/blog");
+var middleware = require("../middleware");
 
 // INDEX Route
 router.get("/", function(req, res){
@@ -10,7 +11,7 @@ router.get("/", function(req, res){
 });
 
 // NEW ROUTE
-router.get("/new", isLoggedIn, function(req, res){
+router.get("/new", middleware.isLoggedIn, function(req, res){
 	res.render("blog/new", {currentUser: req.user});
 });
 
@@ -38,7 +39,7 @@ router.get("/:id", function(req, res){
 });
 
 // EDIT ROUTE
-router.get("/:id/edit", isLoggedIn, function(req, res){
+router.get("/:id/edit", middleware.isLoggedIn, function(req, res){
 	Blog.findById(req.params.id, function(err, foundBlog){
 		if(err) {
 			res.rediret("blog/index");
@@ -49,7 +50,7 @@ router.get("/:id/edit", isLoggedIn, function(req, res){
 });
 
 // UPDATE ROUTE
-router.put("/:id", isLoggedIn, function(req, res){
+router.put("/:id", middleware.isLoggedIn, function(req, res){
 	Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
 		if(err){
 			res.redirect("/blogs");
@@ -60,7 +61,7 @@ router.put("/:id", isLoggedIn, function(req, res){
 });
 
 // DESTROY
-router.delete("/:id", isLoggedIn, function(req, res){
+router.delete("/:id", middleware.isLoggedIn, function(req, res){
 	Blog.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			res.redirect("/blogs");
@@ -70,6 +71,7 @@ router.delete("/:id", isLoggedIn, function(req, res){
 	});
 });
 
+//just handing on to this middleware code to make sure all is well
 // function isLoggedIn(req, res, next){
 // 	if(req.isAuthenticated()){
 // 		return next();
@@ -77,7 +79,6 @@ router.delete("/:id", isLoggedIn, function(req, res){
 // 	res.redirect("/login");
 // }
 
-// // something about this is working but erroring - need to fix
 // function isNotLoggedIn(req, res, next){
 // 	if(req.isAuthenticated()){
 // 		res.redirect("/blogs");
