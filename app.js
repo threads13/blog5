@@ -20,9 +20,9 @@ var blogRoutes    = require("./routes/blogs");
 var indexRoutes   = require("./routes/index");
 
 // APP CONFIG
-mongoose.connect("mongodb://localhost/jacob_blog2");
+// mongoose.connect("mongodb://localhost/jacob_blog2");
 
-// mongoose.connect("mongodb://lefty:pass@ds135777.mlab.com:35777/jacobblog");
+mongoose.connect("mongodb://lefty:pass@ds135777.mlab.com:35777/jacobblog");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));

@@ -25,7 +25,6 @@ router.post("/register", function(req, res){
 		} 
 		passport.authenticate("local")(req, res, function(){
 			res.redirect("/blogs");
-			// need to research what this logis is all about by looking at previous video
 		});
 	});
 });

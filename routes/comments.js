@@ -15,7 +15,6 @@ router.get("/new", function(req, res){
 	});
 });
 
-// for some reason the comment is working, but not associated with the blog model
 router.post("/", function(req, res){
 	Blog.findById(req.params.id, function(err, blog){
 		if(err){
