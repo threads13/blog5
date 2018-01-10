@@ -1,12 +1,14 @@
 <% include ../partials/header.ejs %>
 
-<div class="container-fluid form postComments">
+
+<div class="container-fluid form index">
 	<% if(currentUser) { %>
-		<a href="<%=blog._id %>/comments/new" class="btn btn-md btn-primary float-right col-md-3">Post New Comment</a>
+		<a href="<%=blog._id %>/comments/new" class="btn btn-md btn-primary float-right col-md-2">Post New Comment</a>
 	<% } %>
-	<div class="thumbnail">
-		<h2 class="col-md-9"><%= blog.title %></h2>
+	<div>
+		<h2 class="col-md-10"><%= blog.title %></h2>
 	</div>
+
 	<div class="container-fluid">
 		<div>
 			<p>Written by <strong id="author"><a href=""><%= blog.author %></a></strong></p>
